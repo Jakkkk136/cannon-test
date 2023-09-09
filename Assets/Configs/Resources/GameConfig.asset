@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad22da8af4a4cb8a3e0e48e51a865ba, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  projectileDrag: 0.01
+  projectileDrag: 0.5
   projectileMass: 20
   gravityForce: -100
   projectileLifetime: 10
   projectileCollisionsToDestroy: 2
   projectilesScale: 1.5
   meshType: 2
-  paintOnCollisionColor: {r: 0.27489018, g: 0.39956385, b: 0.7735849, a: 1}
+  paintOnCollisionColor: {r: 0.09656452, g: 0.30105925, b: 0.8773585, a: 1}
   paintHardness: 0.6
   paintStrength: 0.6
   paintRadius: 1.5
@@ -61,4 +61,4 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   maxCameraShakeOffset: 1
-  maxCannonRecoil: 3
+  maxCannonRecoil: 2
