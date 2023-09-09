@@ -1,9 +1,8 @@
 ﻿using System;
-using _Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DefaultNamespace.UI
+namespace Core.UI
 {
 	public class PowerSlider : MonoBehaviour
 	{
@@ -17,7 +16,7 @@ namespace DefaultNamespace.UI
 		public Action<float> OnValueChanged;
 
 		public float GetValue => slider.value;
-		
+
 		private void Start()
 		{
 			slider.onValueChanged.AddListener(OnSliverValueChanged);
@@ -27,7 +26,7 @@ namespace DefaultNamespace.UI
 		private void OnSliverValueChanged(float val)
 		{
 			valueText.text = Mathf.RoundToInt(val * 100f).ToString();
-			
+
 			Vector3 valueTextPos = valueText.transform.position;
 			valueTextPos.y = handleTransform.position.y;
 			valueText.transform.position = valueTextPos;
@@ -36,7 +35,7 @@ namespace DefaultNamespace.UI
 
 			float scaleGradient = textScaleAnimationCurve.Evaluate(val);
 			valueText.transform.localScale = new Vector3(scaleGradient, scaleGradient, scaleGradient);
-			
+
 			OnValueChanged?.Invoke(val);
 		}
 	}

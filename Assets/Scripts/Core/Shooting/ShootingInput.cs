@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Core.Shooting
 {
 	[Serializable]
 	public class ShootingInput
@@ -33,11 +33,12 @@ namespace DefaultNamespace
 			{
 				Debug.LogError("Cant find aim point");
 			}
-			
+
+			//Clamp aim direction to camera forward
 			float inputAndCameraForwardDot = Vector3.Dot(inputVector, mainCam.transform.forward);
 			inputVector *= inputAndCameraForwardDot;
 			inputVector.y = Mathf.Max(0, inputVector.y);
-            
+
 			return inputVector;
 		}
 	}

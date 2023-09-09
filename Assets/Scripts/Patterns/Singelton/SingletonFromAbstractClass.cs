@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace _Scripts.Patterns
+namespace Patterns.Singelton
 {
 	public abstract class SingletonFromAbstractClass<T> : MonoBehaviour
 	{

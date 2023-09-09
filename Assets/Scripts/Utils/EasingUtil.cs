@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UIElements.Experimental;
 
-namespace _Scripts.Utils
+namespace Utils
 {
 	public static class EasingUtil
 	{

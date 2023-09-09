@@ -75,8 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a1565596919c940bd5dc4d8a8c1b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultLineMaterials: []
-  reloadLineMaterials: []
   _lineRenderer: {fileID: 7614541235949319455}
   lineSegments: 30
   projectilePhysicStepper: {fileID: 0}
@@ -131,8 +129,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.027279258
+        time: 0.0017166138
+        value: 0.11584127
         inSlope: 0
         outSlope: 0
         tangentMode: 0

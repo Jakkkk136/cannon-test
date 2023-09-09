@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace Core.Shooting
 {
 	public class Cannon : MonoBehaviour
 	{

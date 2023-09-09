@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace.MeshGeneration
+namespace Core.ProjectileCreation.ProceduralMesh
 {
 	public interface IMeshGenerator
 	{

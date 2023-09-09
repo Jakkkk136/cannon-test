@@ -1,7 +1,8 @@
 using System;
+using Patterns.Singelton.SingeltonAttributes;
 using UnityEngine;
 
-namespace _Scripts.Patterns
+namespace Patterns.Singelton
 {
 	public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>, new()
 	{

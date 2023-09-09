@@ -4,28 +4,28 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-[Serializable]
-public struct TransformLocalStruct
+namespace Extensions
 {
-	public Transform parent;
-	public Vector3 localPosition;
-	public Vector3 localEulerAngles;
-	public Vector3 localScale;
-	public bool active;
-}
+	[Serializable]
+	public struct TransformLocalStruct
+	{
+		public Transform parent;
+		public Vector3 localPosition;
+		public Vector3 localEulerAngles;
+		public Vector3 localScale;
+		public bool active;
+	}
 
-[Serializable]
-public struct TransformGlobalStruct
-{
-	public Vector3 Position;
-	public Vector3 EulerAngles;
-	public Vector3 Scale;
-	public bool active;
-}
+	[Serializable]
+	public struct TransformGlobalStruct
+	{
+		public Vector3 Position;
+		public Vector3 EulerAngles;
+		public Vector3 Scale;
+		public bool active;
+	}
 
 
-namespace _Scripts.Extensions
-{
 	public static class TransformExtensions
 	{
 		private static Transform helperObject;

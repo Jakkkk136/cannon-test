@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
 
-namespace _Scripts.Extensions
+namespace Extensions
 {
 	public static class ListExtention
 	{
@@ -62,4 +62,3 @@ namespace _Scripts.Extensions
 		}
 	}
 }
-

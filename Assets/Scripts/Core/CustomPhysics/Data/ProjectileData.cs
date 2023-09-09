@@ -1,6 +1,6 @@
 ﻿using Unity.Mathematics;
 
-namespace DefaultNamespace.CustomPhysics.Data
+namespace Core.CustomPhysics.Data
 {
 	public struct ProjectileData
 	{

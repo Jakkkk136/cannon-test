@@ -12,16 +12,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad22da8af4a4cb8a3e0e48e51a865ba, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  projectileDrag: 0.5
+  projectileDrag: 0.01
   projectileMass: 20
   gravityForce: -100
   projectileLifetime: 10
   projectileCollisionsToDestroy: 2
-  projectilesScale: 1.25
+  projectilesScale: 1.5
   meshType: 2
   paintOnCollisionColor: {r: 0.27489018, g: 0.39956385, b: 0.7735849, a: 1}
-  paintHardness: 0.25
-  paintStrength: 0.3
-  paintRadius: 1.25
+  paintHardness: 0.6
+  paintStrength: 0.6
+  paintRadius: 1.5
   shotPowerMultiplierRange: {x: 50, y: 200}
-  horizontalForceScale: 0.8
+  horizontalForceScale: 0.5
+  shootCooldown: 0.5
+  maxFeedbackDuration: 1
+  feedbackAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.41593724
+      value: 0.041368224
+      inSlope: -0.2667837
+      outSlope: -0.2667837
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1439276
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.016332164
+      outSlope: -0.016332164
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.43333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxCameraShakeOffset: 1
+  maxCannonRecoil: 3

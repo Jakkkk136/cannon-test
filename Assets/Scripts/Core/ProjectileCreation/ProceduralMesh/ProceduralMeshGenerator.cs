@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using DefaultNamespace.MeshGeneration.Enums;
+using Core.ProjectileCreation.ProceduralMesh.Enums;
 using UnityEngine;
 
-namespace DefaultNamespace.MeshGeneration
+namespace Core.ProjectileCreation.ProceduralMesh
 {
 	public class ProceduralMeshGenerator : MonoBehaviour
 	{

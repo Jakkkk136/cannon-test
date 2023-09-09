@@ -1,8 +1,8 @@
 using System.Linq;
-using _Scripts.Utils;
 using UnityEngine;
+using Utils;
 
-namespace _Scripts.Patterns
+namespace Patterns.Singelton
 {
 	/// <summary>
 	///     Created config Scriptable Object MUST be in Resources folder and MUST be the same as Class name

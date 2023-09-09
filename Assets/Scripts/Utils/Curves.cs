@@ -1,7 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace _Scripts.Helpers.Curves
+namespace Utils
 {
 	public static class Curves
 	{

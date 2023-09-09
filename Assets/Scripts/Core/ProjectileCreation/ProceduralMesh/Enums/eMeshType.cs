@@ -1,4 +1,4 @@
-﻿namespace DefaultNamespace.MeshGeneration.Enums
+﻿namespace Core.ProjectileCreation.ProceduralMesh.Enums
 {
 	public enum eMeshType
 	{

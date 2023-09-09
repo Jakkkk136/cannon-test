@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace _Scripts.Helpers
+namespace Utils
 {
 #if UNITY_EDITOR
 	public static class AssetDatabaseFindWorkaround

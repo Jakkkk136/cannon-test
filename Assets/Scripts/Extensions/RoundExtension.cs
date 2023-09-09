@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _Scripts.Extensions
+namespace Extensions
 {
 	public static class RoundExtension
 	{

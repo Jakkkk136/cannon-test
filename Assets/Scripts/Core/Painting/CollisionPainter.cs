@@ -1,20 +1,23 @@
 using UnityEngine;
 
-public class CollisionPainter : MonoBehaviour
+namespace Core.Painting
 {
-	public Color paintColor;
-
-	public float radius = 1;
-	public float strength = 1;
-	public float hardness = 1;
-
-	private void OnCollisionStay(Collision other)
+	public class CollisionPainter : MonoBehaviour
 	{
-		Paintable p = other.collider.GetComponent<Paintable>();
-		if (p != null)
+		public Color paintColor;
+
+		public float radius = 1;
+		public float strength = 1;
+		public float hardness = 1;
+
+		private void OnCollisionStay(Collision other)
 		{
-			Vector3 pos = other.contacts[0].point;
-			PaintManager.Instance.Paint(p, pos, radius, hardness, strength, paintColor);
+			Paintable p = other.collider.GetComponent<Paintable>();
+			if (p != null)
+			{
+				Vector3 pos = other.contacts[0].point;
+				PaintManager.Instance.Paint(p, pos, radius, hardness, strength, paintColor);
+			}
 		}
 	}
 }

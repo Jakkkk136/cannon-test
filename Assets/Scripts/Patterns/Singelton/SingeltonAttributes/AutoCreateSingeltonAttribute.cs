@@ -1,6 +1,9 @@
 ﻿using System;
 
-[AttributeUsage(AttributeTargets.Class)]
-public sealed class AutoCreateSingeltonAttribute : Attribute
+namespace Patterns.Singelton.SingeltonAttributes
 {
+	[AttributeUsage(AttributeTargets.Class)]
+	public sealed class AutoCreateSingeltonAttribute : Attribute
+	{
+	}
 }

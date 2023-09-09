@@ -1,6 +1,7 @@
-﻿using Unity.Mathematics;
+﻿using Core.Projectiles;
+using Unity.Mathematics;
 
-namespace DefaultNamespace.CustomPhysics.Data
+namespace Core.CustomPhysics.Data
 {
 	public struct ProjectileCreationTicket
 	{

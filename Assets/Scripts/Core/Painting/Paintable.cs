@@ -1,54 +1,56 @@
-using System;
 using UnityEngine;
 
-public class Paintable : MonoBehaviour
+namespace Core.Painting
 {
-	private const int TEXTURE_SIZE = 1024;
-
-	public float extendsIslandOffset = 1;
-
-	private RenderTexture extendIslandsRenderTexture;
-	private RenderTexture maskRenderTexture;
-
-	private readonly int maskTextureID = Shader.PropertyToID("_MaskTexture");
-
-	private Renderer rend;
-	private RenderTexture supportTexture;
-	private RenderTexture uvIslandsRenderTexture;
-
-	public Vector3 GetClosestPointOnBounds(Vector3 toPoint) => rend.bounds.ClosestPoint(toPoint);
-    
-	private void Start()
+	public class Paintable : MonoBehaviour
 	{
-		maskRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
-		maskRenderTexture.filterMode = FilterMode.Bilinear;
+		private const int TEXTURE_SIZE = 1024;
 
-		extendIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
-		extendIslandsRenderTexture.filterMode = FilterMode.Bilinear;
+		public float extendsIslandOffset = 1;
 
-		uvIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
-		uvIslandsRenderTexture.filterMode = FilterMode.Bilinear;
+		private readonly int maskTextureID = Shader.PropertyToID("_MaskTexture");
 
-		supportTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
-		supportTexture.filterMode = FilterMode.Bilinear;
+		private RenderTexture extendIslandsRenderTexture;
+		private RenderTexture maskRenderTexture;
 
-		rend = GetComponent<Renderer>();
-		rend.material.SetTexture(maskTextureID, extendIslandsRenderTexture);
+		private Renderer rend;
+		private RenderTexture supportTexture;
+		private RenderTexture uvIslandsRenderTexture;
 
-		PaintManager.Instance.initTextures(this);
+		private void Start()
+		{
+			maskRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
+			maskRenderTexture.filterMode = FilterMode.Bilinear;
+
+			extendIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
+			extendIslandsRenderTexture.filterMode = FilterMode.Bilinear;
+
+			uvIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
+			uvIslandsRenderTexture.filterMode = FilterMode.Bilinear;
+
+			supportTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
+			supportTexture.filterMode = FilterMode.Bilinear;
+
+			rend = GetComponent<Renderer>();
+			rend.material.SetTexture(maskTextureID, extendIslandsRenderTexture);
+
+			PaintManager.Instance.initTextures(this);
+		}
+
+		private void OnDisable()
+		{
+			maskRenderTexture.Release();
+			uvIslandsRenderTexture.Release();
+			extendIslandsRenderTexture.Release();
+			supportTexture.Release();
+		}
+
+		public Vector3 GetClosestPointOnBounds(Vector3 toPoint) => rend.bounds.ClosestPoint(toPoint);
+
+		public RenderTexture getMask() => maskRenderTexture;
+		public RenderTexture getUVIslands() => uvIslandsRenderTexture;
+		public RenderTexture getExtend() => extendIslandsRenderTexture;
+		public RenderTexture getSupport() => supportTexture;
+		public Renderer getRenderer() => rend;
 	}
-
-	private void OnDisable()
-	{
-		maskRenderTexture.Release();
-		uvIslandsRenderTexture.Release();
-		extendIslandsRenderTexture.Release();
-		supportTexture.Release();
-	}
-
-	public RenderTexture getMask() => maskRenderTexture;
-	public RenderTexture getUVIslands() => uvIslandsRenderTexture;
-	public RenderTexture getExtend() => extendIslandsRenderTexture;
-	public RenderTexture getSupport() => supportTexture;
-	public Renderer getRenderer() => rend;
 }

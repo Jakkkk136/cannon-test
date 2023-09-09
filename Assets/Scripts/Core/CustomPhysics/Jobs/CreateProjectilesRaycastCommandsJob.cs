@@ -1,10 +1,10 @@
-﻿using DefaultNamespace.CustomPhysics.Data;
+﻿using Core.CustomPhysics.Data;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
 
-namespace DefaultNamespace.CustomPhysics
+namespace Core.CustomPhysics.Jobs
 {
 	[BurstCompile]
 	public struct CreateProjectilesRaycastCommandsJob : IJobFor

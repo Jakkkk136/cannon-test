@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using DefaultNamespace.Configs;
-using DefaultNamespace.CustomPhysics.Data;
+using Core.Configs;
+using Core.CustomPhysics.Data;
+using Core.CustomPhysics.Jobs;
+using Core.Projectiles;
 using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace DefaultNamespace.CustomPhysics
+namespace Core.CustomPhysics
 {
 	[Serializable]
 	public class ProjectilePhysicStepper : MonoBehaviour
 	{
 		[SerializeField] private LayerMask collisionMask;
-		
+
 		[Header("Sets from config")]
 		[SerializeField] private float projectileDrag = 0.01f;
 		[SerializeField] private float projectileMass = 1f;
@@ -23,14 +25,14 @@ namespace DefaultNamespace.CustomPhysics
 
 		[Space]
 		[SerializeField] private ProjectileCollisionProcessor projectileCollisionProcessor;
-		
-		private GameConfig config;
-		
+
 		private List<Projectile> activeProjectiles = new List<Projectile>();
 		private NativeList<ProjectileData> activeProjectilesDatas;
+
+		private GameConfig config;
 		private JobHandle[] dependencyHandles;
 		private NativeArray<RaycastHit> hits;
-		
+
 		private List<ProjectileCreationTicket> projectileCreationTickets = new List<ProjectileCreationTicket>();
 		private NativeArray<RaycastCommand> raycastCommands;
 		private NativeList<int> raycastHitsWithCollisionIndexes;
@@ -44,29 +46,6 @@ namespace DefaultNamespace.CustomPhysics
 			SetParamsFromConfig();
 		}
 
-		private void OnEnable()
-		{
-			activeProjectilesDatas = new NativeList<ProjectileData>(Allocator.Persistent);
-			raycastCommands = new NativeArray<RaycastCommand>(300, Allocator.Persistent);
-			hits = new NativeArray<RaycastHit>(300, Allocator.Persistent);
-			raycastHitsWithCollisionIndexes = new NativeList<int>(300, Allocator.Persistent);
-
-			dependencyHandles = new JobHandle[3];
-
-			projectileCollisionProcessor = new ProjectileCollisionProcessor(hits, raycastHitsWithCollisionIndexes);
-		}
-
-		private void OnDestroy()
-		{
-			Array.ForEach(dependencyHandles, handle => handle.Complete());
-			raycastCommands.Dispose();
-			hits.Dispose();
-			activeProjectilesDatas.Dispose();
-			raycastHitsWithCollisionIndexes.Clear();
-
-			config.OnValuesChanged -= SetParamsFromConfig;
-		}
-        
 		private void Update()
 		{
 			ProcessFromPreviousFrame();
@@ -95,8 +74,31 @@ namespace DefaultNamespace.CustomPhysics
 				projectileDrag = projectileDrag,
 				gravityForce = gravityForce,
 				deltaTime = Time.fixedDeltaTime,
-				projectileCollisionsToDestroy = projectileCollisionsToDestroy,
+				projectileCollisionsToDestroy = projectileCollisionsToDestroy
 			}.Schedule(activeProjectilesDatas.Length, dependencyHandles[1]);
+		}
+
+		private void OnEnable()
+		{
+			activeProjectilesDatas = new NativeList<ProjectileData>(Allocator.Persistent);
+			raycastCommands = new NativeArray<RaycastCommand>(300, Allocator.Persistent);
+			hits = new NativeArray<RaycastHit>(300, Allocator.Persistent);
+			raycastHitsWithCollisionIndexes = new NativeList<int>(300, Allocator.Persistent);
+
+			dependencyHandles = new JobHandle[3];
+
+			projectileCollisionProcessor = new ProjectileCollisionProcessor(hits, raycastHitsWithCollisionIndexes);
+		}
+
+		private void OnDestroy()
+		{
+			Array.ForEach(dependencyHandles, handle => handle.Complete());
+			raycastCommands.Dispose();
+			hits.Dispose();
+			activeProjectilesDatas.Dispose();
+			raycastHitsWithCollisionIndexes.Clear();
+
+			config.OnValuesChanged -= SetParamsFromConfig;
 		}
 
 		private void SetParamsFromConfig()
@@ -107,7 +109,7 @@ namespace DefaultNamespace.CustomPhysics
 			projectileLifetime = config.ProjectileLifetime;
 			projectileCollisionsToDestroy = config.ProjectileCollisionsToDestroy;
 		}
-		
+
 		public float3 GetPositionInFuture(float3 initialVelocity, float3 startPos, float atTime)
 		{
 			// Calculate drag acceleration
@@ -132,7 +134,7 @@ namespace DefaultNamespace.CustomPhysics
 			Array.ForEach(dependencyHandles, handle => handle.Complete());
 
 			projectileCollisionProcessor.ProcessCollisions();
-            
+
 			float currentTime = Time.time;
 
 			for (int i = activeProjectilesDatas.Length - 1; i >= 0; i--)
@@ -145,7 +147,7 @@ namespace DefaultNamespace.CustomPhysics
 				if (currentTime - data.creationTime > projectileLifetime || data.isMoving == false)
 				{
 					activeProjectilesDatas.RemoveAt(i);
-					activeProjectiles[i].ReturnToPool();
+					activeProjectiles[i].ResetObject();
 					activeProjectiles.RemoveAt(i);
 				}
 			}
@@ -169,7 +171,7 @@ namespace DefaultNamespace.CustomPhysics
 
 				activeProjectilesDatas.Add(newData);
 			}
-			
+
 			projectileCreationTickets.Clear();
 		}
 
